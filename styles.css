@@ -8,8 +8,24 @@ body {
 }
 
 #main-header {
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.0); /* Semi-transparent background */
   color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+#main-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('images/zeus.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3; /* Adjust this value to change the transparency */
+  z-index: -1;
 }
 
 .header-content {
@@ -482,4 +498,49 @@ body {
 
 .team-member-info h3 {
     margin-top: 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.copyright {
+  flex: 1;
+}
+
+.get-in-touch {
+  flex: 1;
+  text-align: right;
+}
+
+.get-in-touch ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.get-in-touch li {
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .copyright, .get-in-touch {
+    flex: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .get-in-touch {
+    text-align: center;
+  }
 }
