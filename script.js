@@ -91,3 +91,24 @@ window.addEventListener('scroll', function() {
         menuToggle.setAttribute('aria-expanded', 'false');
     }
 });
+
+// Handle header visibility on scroll
+let lastScrollTop = 0;
+const header = document.getElementById('main-header');
+const headerHeight = header.offsetHeight;
+
+function handleHeaderVisibility() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+        // Scrolling down & past the header
+        header.classList.add('hidden');
+    } else {
+        // Scrolling up
+        header.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+}
+
+window.addEventListener('scroll', handleHeaderVisibility);
