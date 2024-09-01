@@ -73,14 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             productDescriptions = {};
-            data.Products.forEach(product => {
-                const key = `#${product.name.toLowerCase().replace(/\s+/g, '-')}`;
-                productDescriptions[key] = product.tagline;
-            });
-            data.Services.forEach(product => {
-                const key = `#${product.name.toLowerCase().replace(/\s+/g, '-')}`;
-                productDescriptions[key] = product.tagline;
-            });
+            for (const section in data) {
+                if (data.hasOwnProperty(section)) {
+                    console.log(section);
+                    data[section].forEach(product => {
+                        const key = `#${product.name.toLowerCase().replace(/\s+/g, '-')}`;
+                        productDescriptions[key] = product.tagline;
+                    });
+        
+                }
+            }
+            
             applyProductDescriptions();
             console.log('Loaded product descriptions:', productDescriptions);
         })
