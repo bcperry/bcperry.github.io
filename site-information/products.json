@@ -5,8 +5,8 @@
             "tagline": "Understanding the movement of assets is critical.  Panoptes is a custom AI solution, deployable anywhere you have security cameras which will enable asset tracking in real time. "
         },
         {
-            "name": "Commander's Log",
-            "tagline": "Commanders Log: Notes that work for you.  Commanders Log is a custom AI solution that will enable you to use any source of audio to gain understanding.  It enables users to generate summaries of recorded events digitally, no green notebook required. "
+            "name": "Commanders Log",
+            "tagline": "Notes that work for you.  Commanders Log is a custom AI solution that will enable you to use any source of audio to gain understanding.  It enables users to generate summaries of recorded events digitally, no green notebook required. "
         },
         {
             "name": "Janus",
@@ -17,7 +17,7 @@
             "tagline": "Named for the hunting dog that always caught its prey, Laelaps is a hardware system designed to convert any unguided rocket into a guided missile tailored for any target. From small Unmanned Arial Systems, to large aircraft, to tanks. Laelaps provides countermeasure resistant guidance to any motor, for any target, on demand."
         },
         {
-            "name": "Wearable Data Ingestion",
+            "name": "Wearable",
             "tagline": "Seconds matter. Wearable Data Ingestion provides real-time data collection and analysis from any wearable device, allowing for immediate insights and decision-making in critical situations."
         }
     ],
@@ -33,6 +33,12 @@
         {
             "name": "Developing and Deploying AI/ML Systems",
             "tagline": "Enhance your mission capabilities with our end-to-end AI/ML development and deployment services: Custom AI model development tailored to your needs Seamless deployment of AI models on government systems Ongoing support and maintenance for deployed AI solutions Our experts work closely with you to develop and implement AI solutions that drive your mission forward, leveraging cutting-edge technology to give you a competitive edge."
+        }
+    ],
+    "About":[
+        {
+            "name": "About",
+            "tagline": "We are a small defense and AI consulting firm based in Huntsville, AL area.  We work with our clients to understand their needs and help them achieve their goals."
         }
     ]
 }

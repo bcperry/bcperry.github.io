@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
             productDescriptions = {};
             for (const section in data) {
                 if (data.hasOwnProperty(section)) {
-                    console.log(section);
                     data[section].forEach(product => {
                         const key = `#${product.name.toLowerCase().replace(/\s+/g, '-')}`;
                         productDescriptions[key] = product.tagline;
@@ -95,9 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function applyProductDescriptions() {
         document.querySelectorAll('.product-list a').forEach(link => {
-            const href = link.getAttribute('href').split('#')[1];
-            const key = `#${href}`;
+            const href = link.getAttribute('href');
+            const key = `${href}`;
             const description = productDescriptions[key] || 'No description available';
+
+            console.log(key, href, description);
+
             link.setAttribute('data-description', description);
         });
     }
