@@ -227,7 +227,7 @@ body {
 #hero {
     position: relative;
     height: 80vh; /* Adjust this value as needed */
-    background-image: url('/images/panoptes.png');
+    background-image: url('/images/panoptes.jpg');
     background-size: cover;
     background-position: center left;
     display: flex;
