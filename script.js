@@ -12,8 +12,6 @@ function handleScrollAnimation() {
     fadeElements.forEach(el => {
         if (isElementInViewport(el)) {
             el.classList.add('visible');
-        } else {
-            el.classList.remove('visible');
         }
     });
 }
@@ -117,9 +115,16 @@ function smoothScroll(target) {
 }
 
 function populateProductsAndServices() {
+    console.log('Attempting to populate products and services');
     fetch('../site-information/products.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Products data loaded:', data);
             const productsContainer = document.getElementById('products');
             const servicesContainer = document.getElementById('services');
 
@@ -137,6 +142,8 @@ function populateProductsAndServices() {
                     `;
                     productsContainer.innerHTML += productHTML;
                 });
+            } else {
+                console.warn('Products container not found');
             }
 
             if (servicesContainer) {
@@ -153,11 +160,20 @@ function populateProductsAndServices() {
                     `;
                     servicesContainer.innerHTML += serviceHTML;
                 });
+            } else {
+                console.warn('Services container not found');
             }
 
-            handleScrollAnimation();
+            // Call handleScrollAnimation after populating content
+            setTimeout(handleScrollAnimation, 100);
         })
-        .catch(error => console.error('Error loading product data:', error));
+        .catch(error => {
+            console.error('Error loading product data:', error);
+            // Display an error message to the user
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Sorry, we encountered an error loading the content. Please try refreshing the page.';
+            document.body.appendChild(errorMessage);
+        });
 }
 
 function populateProductPage() {
@@ -199,6 +215,7 @@ function loadFooter() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM content loaded');
     loadHeader();
     loadFooter();
     populateProductsAndServices();
@@ -216,7 +233,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     initializeMenuToggle();
-    handleScrollAnimation();
+    
+    // Add scroll event listener for continuous fade-in effect
+    window.addEventListener('scroll', handleScrollAnimation);
 });
 
 window.addEventListener('scroll', function() {
