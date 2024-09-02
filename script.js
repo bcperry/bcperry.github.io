@@ -54,9 +54,10 @@ function initializeMenuToggle() {
 
 function applyProductDescriptions(productDescriptions) {
     document.querySelectorAll('.product-list a').forEach(link => {
-        const href = link.getAttribute('href');
-        const key = `${href}`;
+        const href = link.getAttribute('href').split('#').pop();
+        const key = `#${href}`;
         const description = productDescriptions[key] || 'No description available';
+        console.log(href, key, description)
         link.setAttribute('data-description', description);
     });
 }
