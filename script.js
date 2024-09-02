@@ -194,7 +194,7 @@ function populateProductPage() {
 }
 
 function loadHeader() {
-    fetch('header.html')
+    fetch((window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) ? 'pages/header.html' : '../pages/header.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
@@ -206,7 +206,7 @@ function loadHeader() {
 }
 
 function loadFooter() {
-    fetch('footer.html')
+    fetch((window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) ? 'pages/footer.html' : '../pages/footer.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('footer-placeholder').innerHTML = data;
