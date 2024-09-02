@@ -57,7 +57,7 @@ function applyProductDescriptions(productDescriptions) {
         const href = link.getAttribute('href').split('#').pop();
         const key = `#${href}`;
         const description = productDescriptions[key] || 'No description available';
-        console.log(href, key, description)
+        // console.log(href, key, description)
         link.setAttribute('data-description', description);
     });
 }
@@ -76,7 +76,7 @@ function fetchProductDescriptions() {
                 }
             }
             applyProductDescriptions(productDescriptions);
-            console.log('Loaded product descriptions:', productDescriptions);
+            // console.log('Loaded product descriptions:', productDescriptions);
         })
         .catch(error => {
             console.error('Error loading product descriptions:', error);
@@ -86,14 +86,22 @@ function fetchProductDescriptions() {
 
 function handleHeaderVisibility() {
     let lastScrollTop = 0;
-    const header = document.getElementById('main-header');
-    const headerHeight = header.offsetHeight;
+    let header = null;
 
     return function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (!header) {
+            header = document.getElementById('main-header');
+            if (!header) return; // Exit if header is still not found
+        }
+
+        const headerHeight = header.offsetHeight;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
         if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+            // Scrolling down
             header.classList.add('hidden');
-        } else {
+        } else if (scrollTop < lastScrollTop) {
+            // Scrolling up
             header.classList.remove('hidden');
         }
         lastScrollTop = scrollTop;
@@ -175,6 +183,8 @@ function loadHeader() {
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
             initializeMenuToggle();
+            // Add scroll event listener after header is loaded
+            window.addEventListener('scroll', handleHeaderVisibility());
         })
         .catch(error => console.error('Error loading header:', error));
 }
@@ -206,8 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     initializeMenuToggle();
-    window.addEventListener('scroll', handleScrollAnimation);
-    window.addEventListener('scroll', handleHeaderVisibility());
     handleScrollAnimation();
 });
 
