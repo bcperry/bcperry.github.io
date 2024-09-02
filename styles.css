@@ -8,12 +8,12 @@ body {
 }
 
 #main-header {
-  background-color: rgba(0,0,0, 0); /* Increased opacity for better visibility */
+  background-color: rgba(0,0,0, 0);
   color: #fff;
-  position: fixed; /* Change to fixed positioning */
-  width: 100%; /* Ensure it spans the full width */
-  z-index: 1000; /* Ensure it's above other elements */
-  top: 0; /* Stick to the top of the viewport */
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
   transition: transform 0.3s ease-in-out;
   height: 80px;
 }
@@ -28,7 +28,7 @@ body {
   background-image: url('images/zeus.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0.3; /* Adjust this value to change the transparency */
+  opacity: 0.3;
   z-index: -1;
 }
 
@@ -36,72 +36,13 @@ body {
   transform: translateY(-100%);
 }
 
-/* Remove these if they still exist */
-/*
-#header-placeholder {
-    transition: transform 0.3s ease-in-out;
-}
-
-#header-placeholder.hidden {
-    transform: translateY(-100%);
-}
-*/
-
 .header-content {
   display: flex;
   justify-content: space-between;
-  padding: 0%;
   align-items: center;
   height: 100%;
   max-width: 1200px;
   margin: auto;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
-.hamburger {
-  display: block;
-  width: 30px;
-  height: 3px;
-  background-color: #fff;
-  position: relative;
-  transition: background-color 0.3s;
-}
-
-.hamburger::before,
-.hamburger::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  transition: transform 0.3s;
-}
-
-.hamburger::before {
-  transform: translateY(-8px);
-}
-
-.hamburger::after {
-  transform: translateY(8px);
-}
-
-.menu-toggle.active .hamburger {
-  background-color: transparent;
-}
-
-.menu-toggle.active .hamburger::before {
-  transform: translateY(0) rotate(45deg);
-}
-
-.menu-toggle.active .hamburger::after {
-  transform: translateY(0) rotate(-45deg);
 }
 
 .main-nav {
@@ -143,6 +84,71 @@ body {
   text-align: center;
 }
 
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger, .hamburger::before, .hamburger::after {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.hamburger::before, .hamburger::after {
+  content: '';
+  position: absolute;
+}
+
+.hamburger::before {
+  transform: translateY(-8px);
+}
+
+.hamburger::after {
+  transform: translateY(8px);
+}
+
+.menu-toggle.active .hamburger {
+  background-color: transparent;
+}
+
+.menu-toggle.active .hamburger::before {
+  transform: translateY(0) rotate(45deg);
+}
+
+.menu-toggle.active .hamburger::after {
+  transform: translateY(0) rotate(-45deg);
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media screen and (max-width: 768px) {
   .header-content {
     position: relative;
@@ -162,7 +168,7 @@ body {
     visibility: hidden;
     opacity: 0;
     transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    transition: all 0.3s ease;
     z-index: 999;
   }
 
@@ -191,34 +197,9 @@ body {
   }
 }
 
-/* If you're using SVG icons, adjust their size */
 .social-links svg {
   width: 20px;
   height: 20px;
-}
-
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: #fff;
-}
-
-.product {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.product.fade-in {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .product-image {
@@ -226,7 +207,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 300px; /* Ensure a minimum height */
+  min-height: 300px;
 }
 
 .product-image img {
@@ -237,13 +218,13 @@ body {
 
 #hero {
     position: relative;
-    height: 80vh; /* Adjust this value as needed */
+    height: 80vh;
     background-image: url('/images/panoptes.jpg');
     background-size: cover;
     background-position: center left;
     display: flex;
     justify-content: flex-end;
-    margin-top: 80px; /* Add margin-top to push content below the fixed header */
+    margin-top: 80px;
 }
 
 .hero-content {
@@ -281,17 +262,6 @@ body {
     background-color: #0056b3;
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 #products {
     padding: 40px 0;
 }
@@ -312,14 +282,6 @@ body {
 
 .product-item:nth-child(even) {
     background-color: #000000;
-}
-
-.product-image {
-    flex: 1;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 300px; /* Ensure a minimum height */
 }
 
 .product-content {
@@ -359,17 +321,6 @@ body {
     background-color: #0056b3;
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .section-header {
     background-color: #333333;
     color: #ffffff;
@@ -380,110 +331,12 @@ body {
     text-align: center;
 }
 
-/* Adjust the main sections to accommodate the sticky header */
 #products, #about, #contact {
-    padding-top: 60px; /* Adjust this value based on your header height */
+    padding-top: 60px;
 }
 
-/* Ensure the product items don't overlap with the sticky header */
 .product-item {
     margin-top: 20px;
-}
-
-
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-}
-
-.hamburger {
-    display: block;
-    width: 30px;
-    height: 3px;
-    background-color: #fff;
-    position: relative;
-    transition: background-color 0.3s;
-}
-
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    transition: transform 0.3s;
-}
-
-.hamburger::before {
-    transform: translateY(-8px);
-}
-
-.hamburger::after {
-    transform: translateY(8px);
-}
-
-.menu-toggle.active .hamburger {
-    background-color: transparent;
-}
-
-.menu-toggle.active .hamburger::before {
-    transform: translateY(0) rotate(45deg);
-}
-
-.menu-toggle.active .hamburger::after {
-    transform: translateY(0) rotate(-45deg);
-}
-
-@media screen and (max-width: 768px) {
-    .header-content {
-        position: relative;
-    }
-
-    .menu-toggle {
-        display: block;
-        z-index: 1000;
-    }
-
-    .main-nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(-20px);
-        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-        z-index: 999;
-    }
-
-    .main-nav.active {
-        visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .product-list {
-        flex-direction: column;
-        padding: 20px;
-    }
-
-    .product-list li {
-        margin: 10px 0;
-    }
-
-    .product-list a {
-        display: block;
-        padding: 10px 0;
-    }
-
-    .product-list a:hover::after {
-        display: none;
-    }
 }
 
 #team {
@@ -561,6 +414,6 @@ body {
 }
 
 main {
-    margin-top: 80px; /* Adjust this value based on your header height */
+    margin-top: 80px;
 }
 
