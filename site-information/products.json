@@ -17,15 +17,11 @@
             "tagline": "Named for the hunting dog that always caught its prey, Laelaps is a hardware system designed to convert any unguided rocket into a guided missile tailored for any target. From small Unmanned Arial Systems, to large aircraft, to tanks. Laelaps provides countermeasure resistant guidance to any motor, for any target, on demand."
         },
         {
-            "name": "Wearable",
-            "tagline": "Seconds matter. Wearable Data Ingestion provides real-time data collection and analysis from any wearable device, allowing for immediate insights and decision-making in critical situations."
+            "name": "Toga",
+            "tagline": "Seconds matter. Toga provides real-time data collection and analysis from any wearable device, allowing for immediate insights and decision-making in critical situations."
         }
     ],
     "Services":[
-        {
-            "name": "Services",
-            "tagline": "With decades of defense and AI experience, we can help you with your AI and machine learning projects."
-        },
         {
             "name": "Testing AI-ML Systems",
             "tagline": "Ensure the reliability and performance of your AI/ML systems with our comprehensive testing services: Rigorous AI/ML testing methodologies Performance evaluation and optimization Tools and expertise to assess AI impact on operations Our team provides the knowledge and resources needed to understand how AI systems will impact your mission, ensuring you stay ahead in an ever-evolving technological landscape."
@@ -39,6 +35,10 @@
         {
             "name": "About",
             "tagline": "We are a small defense and AI consulting firm based in Huntsville, AL area.  We work with our clients to understand their needs and help them achieve their goals."
+        },
+        {
+            "name": "Services",
+            "tagline": "With decades of defense and AI experience, we can help you with your AI and machine learning projects."
         }
     ]
 }
