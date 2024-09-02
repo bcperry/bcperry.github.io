@@ -25,9 +25,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  background-repeat: no-repeat;
+  background-color: #000000;
+  background-position: left 25%;
   background-image: url('images/zeus.jpg');
-  background-size: cover;
-  background-position: center;
   opacity: 0.3;
   z-index: -1;
 }
@@ -326,6 +327,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  background-image: url('images/zeus.jpg');
+  background-repeat: no-repeat;
+  background-color: #000000;
+  background-position: top left;
+  opacity: 0.3;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
