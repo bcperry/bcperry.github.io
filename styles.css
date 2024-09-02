@@ -240,11 +240,13 @@ body {
 .hero-content h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    font-weight: 300;
 }
 
 .hero-content .btn {
@@ -299,11 +301,13 @@ body {
 .product-content h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .product-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    font-weight: 300;
 }
 
 .product-content .btn {
