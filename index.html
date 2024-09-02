@@ -49,23 +49,17 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="copyright">
-                <p>&copy; 2023 Argus Defense. All rights reserved.</p>
-            </div>
-            <div class="get-in-touch">
-                <h3>Get in Touch</h3>
-                <p>Interested in our products or have questions?</p>
-                <ul>
-                    <li><a href="mailto:info@argusdefense.com">Email Us</a></li>
-                    <li><a href="tel:+12345678900">Call Us</a></li>
-                    <li><a href="pages/contact.html">Contact Form</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer will be loaded here -->
+    <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
+    <script>
+        // Load the footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
 </body>
 </html>

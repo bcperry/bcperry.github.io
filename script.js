@@ -18,11 +18,6 @@ function handleScrollAnimation() {
     });
 }
 
-// Add event listeners for scroll and load events
-window.addEventListener('scroll', handleScrollAnimation);
-window.addEventListener('load', handleScrollAnimation);
-
-// Handle sticky headers
 function handleStickyHeaders() {
     const sectionHeaders = document.querySelectorAll('.section-header');
     const observer = new IntersectionObserver(
@@ -41,119 +36,69 @@ function handleStickyHeaders() {
     sectionHeaders.forEach(header => observer.observe(header));
 }
 
-window.addEventListener('load', handleStickyHeaders);
-
-// Handle menu toggle and navigation
-document.addEventListener('DOMContentLoaded', function() {
+function initializeMenuToggle() {
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-nav');
 
-    menuToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        this.classList.toggle('active');
-        mainNav.classList.toggle('active');
-        
-        const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-        this.setAttribute('aria-expanded', !expanded);
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            this.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            
+            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+            this.setAttribute('aria-expanded', !expanded);
+        });
+    }
+}
+
+function applyProductDescriptions(productDescriptions) {
+    document.querySelectorAll('.product-list a').forEach(link => {
+        const href = link.getAttribute('href');
+        const key = `${href}`;
+        const description = productDescriptions[key] || 'No description available';
+        link.setAttribute('data-description', description);
     });
+}
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!menuToggle.contains(e.target) && !mainNav.contains(e.target)) {
-            menuToggle.classList.remove('active');
-            mainNav.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-    });
-
-    // Add descriptions to product links
-    let productDescriptions = {};
-
+function fetchProductDescriptions() {
     fetch('../site-information/products.json')
         .then(response => response.json())
         .then(data => {
-            productDescriptions = {};
+            const productDescriptions = {};
             for (const section in data) {
                 if (data.hasOwnProperty(section)) {
                     data[section].forEach(product => {
                         const key = `#${product.name.toLowerCase().replace(/\s+/g, '-')}`;
                         productDescriptions[key] = product.tagline;
                     });
-        
                 }
             }
-            
-            applyProductDescriptions();
+            applyProductDescriptions(productDescriptions);
             console.log('Loaded product descriptions:', productDescriptions);
         })
         .catch(error => {
             console.error('Error loading product descriptions:', error);
-            // Fallback to default descriptions if JSON fails to load
-            applyProductDescriptions();
+            applyProductDescriptions({});
         });
-
-    function applyProductDescriptions() {
-        document.querySelectorAll('.product-list a').forEach(link => {
-            const href = link.getAttribute('href');
-            const key = `${href}`;
-            const description = productDescriptions[key] || 'No description available';
-
-            console.log(key, href, description);
-
-            link.setAttribute('data-description', description);
-        });
-    }
-
-    document.querySelectorAll('.product-list a').forEach(link => {
-        link.setAttribute('data-description', productDescriptions[link.getAttribute('href')]);
-    });
-});
-
-// Handle mobile menu closing on scroll
-window.addEventListener('scroll', function() {
-    if (window.innerWidth <= 768) {
-        const mainNav = document.querySelector('.main-nav');
-        const menuToggle = document.querySelector('.menu-toggle');
-        mainNav.classList.remove('active');
-        menuToggle.classList.remove('active');
-        menuToggle.setAttribute('aria-expanded', 'false');
-    }
-});
-
-// Handle header visibility on scroll
-let lastScrollTop = 0;
-const header = document.getElementById('main-header');
-const headerHeight = header.offsetHeight;
+}
 
 function handleHeaderVisibility() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
-        // Scrolling down & past the header
-        header.classList.add('hidden');
-    } else {
-        // Scrolling up
-        header.classList.remove('hidden');
-    }
-    
-    lastScrollTop = scrollTop;
-}
+    let lastScrollTop = 0;
+    const header = document.getElementById('main-header');
+    const headerHeight = header.offsetHeight;
 
-window.addEventListener('scroll', handleHeaderVisibility);
-
-// Fade-in animation
-function handleScrollAnimation() {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        if (rect.top <= windowHeight * 0.75) {
-            el.classList.add('visible');
+    return function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+            header.classList.add('hidden');
+        } else {
+            header.classList.remove('hidden');
         }
-    });
+        lastScrollTop = scrollTop;
+    };
 }
 
-// Smooth scrolling for anchor links
 function smoothScroll(target) {
     const element = document.querySelector(target);
     window.scrollTo({
@@ -162,30 +107,6 @@ function smoothScroll(target) {
     });
 }
 
-// Event listeners
-document.addEventListener('DOMContentLoaded', () => {
-    // Handle scroll animation
-    window.addEventListener('scroll', handleScrollAnimation);
-    handleScrollAnimation();
-
-    // Handle smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            smoothScroll(this.getAttribute('href'));
-        });
-    });
-
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
-
-    menuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
-    });
-});
-
-// Function to populate product and service information
 function populateProductsAndServices() {
     fetch('../site-information/products.json')
         .then(response => response.json())
@@ -225,19 +146,10 @@ function populateProductsAndServices() {
                 });
             }
 
-            // After populating, reinitialize the fade-in effect
             handleScrollAnimation();
         })
         .catch(error => console.error('Error loading product data:', error));
 }
-
-// Call the function when the DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    populateProductsAndServices();
-    // ... (existing code) ...
-});
-
-// Add this function to the existing script.js file
 
 function populateProductPage() {
     const productName = window.location.pathname.split('/').pop().replace('.html', '');
@@ -256,9 +168,57 @@ function populateProductPage() {
         .catch(error => console.error('Error loading product data:', error));
 }
 
-// Call this function when the DOM is loaded on product pages
+function loadHeader() {
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            initializeMenuToggle();
+        })
+        .catch(error => console.error('Error loading header:', error));
+}
+
+function loadFooter() {
+    fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    loadHeader();
+    loadFooter();
+    populateProductsAndServices();
+    fetchProductDescriptions();
+
     if (document.querySelector('#product-hero')) {
         populateProductPage();
     }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            smoothScroll(this.getAttribute('href'));
+        });
+    });
+
+    initializeMenuToggle();
+    window.addEventListener('scroll', handleScrollAnimation);
+    window.addEventListener('scroll', handleHeaderVisibility());
+    handleScrollAnimation();
 });
+
+window.addEventListener('scroll', function() {
+    if (window.innerWidth <= 768) {
+        const mainNav = document.querySelector('.main-nav');
+        const menuToggle = document.querySelector('.menu-toggle');
+        mainNav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
+
+window.addEventListener('load', handleScrollAnimation);
+window.addEventListener('load', handleStickyHeaders);
